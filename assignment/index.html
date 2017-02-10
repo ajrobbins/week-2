@@ -55,10 +55,38 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var jsonToCsv = function(json) {
+        console.log(json);
+       };
+
+       var healthCenters = healthCenters;
+       for (i=0; i<healthCenters.length; i++) {
+         console.log([["name", "address"], [healthCenters[i].NAME, healthCenters[i].FULL_ADDRESS]])
+       }
+
+       var myIcon = L.icon({
+         iconUrl: 'images/dentist-icon.png',
+         iconSize: [60, 32],
+         iconAnchor: [32, 80],
+         popupAnchor: [-3, -76],
+       });
+
+      var addMarkers = function(map) {
+        for (i=0; i<healthCenters.length; i++){
+          var name = healthCenters[i].NAME
+          var dental = name.includes("Dental")
+          if (dental==true) {
+            L.marker([healthCenters[i].LAT, healthCenters[i].LNG],{icon: myIcon}).addTo(map)
+              .bindPopup(healthCenters[i].NAME).openPopup();
+            }
+          else {
+            L.marker([healthCenters[i].LAT, healthCenters[i].LNG]).addTo(map)
+              .bindPopup(healthCenters[i].NAME).openPopup();
+            }
+          };
+      };
 
 
-      var addMarkers = function(map) {};
 
       /* =====================
 
